@@ -1,27 +1,53 @@
-# Laravel PHP Framework
+# Background
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+# Setup
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+```
+git clone git@github.com:timbroder/mock-bootable-laravel-model-trait.git
+cd mock-bootable-laravel-model-trait
+```
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+# Test
 
-## Official Documentation
+To see the trait working in the app:
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+```
+artisan testtrait
+```
+Expected output:
 
-## Contributing
+```
+Testing that class: App\MyModel has method: bootMyTrait because of Trait: App\MyTrait
+Class: App\MyModel has method: bootMyTrait
+Booting MyTrait
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+To see mock failing:
 
-## Security Vulnerabilities
+```
+phpunit
+```
+Unexpected output:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+```
+PHPUnit 5.1.0 by Sebastian Bergmann and contributors.
 
-## License
+E                                                                   1 / 1 (100%)
+Testing that class: Mock_MyModel_9ee820db has method: bootMyTrait because of Trait: App\MyTrait
+Class: Mock_MyModel_9ee820db has method: bootMyTrait
+Class: Mock_MyModel_9ee820db failed calling bootMyTrait
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+Time: 129 ms, Memory: 18.00Mb
+
+There was 1 error:
+
+1) ExampleTest::testTraitBooting
+PHPUnit_Framework_MockObject_BadMethodCallException:
+
+mock-bootable-laravel-model-trait/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:326
+mock-bootable-laravel-model-trait/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:309
+mock-bootable-laravel-model-trait/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:296
+mock-bootable-laravel-model-trait/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:277
+mock-bootable-laravel-model-trait/tests/ExampleTest.php:16
+```
