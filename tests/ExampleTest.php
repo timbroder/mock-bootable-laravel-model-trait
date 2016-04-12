@@ -11,9 +11,8 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testBasicExample()
+    public function testTraitBooting()
     {
-        $this->visit('/')
-             ->see('Laravel 5');
+        $model = $this->getMock('App\MyModel');
     }
 }
