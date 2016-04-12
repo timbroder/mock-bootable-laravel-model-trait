@@ -321,7 +321,7 @@ abstract class Model implements ArrayAccess, Arrayable, Jsonable, JsonSerializab
         foreach (class_uses_recursive($class) as $trait) {
             print("\nTesting that class: $class has method: " . $method = 'boot'.class_basename($trait) . " because of Trait: $trait\n");
             if (method_exists($class, $method = 'boot'.class_basename($trait))) {
-                print("Class: $class has method: " . $method = 'boot'.class_basename($trait) . "\n");
+                print("Class: $class has method: $method \n");
                 try {
                     forward_static_call([$class, $method]);
                 } catch (\PHPUnit_Framework_MockObject_BadMethodCallException $e) {
